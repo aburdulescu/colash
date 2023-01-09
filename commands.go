@@ -6,25 +6,25 @@ import (
 )
 
 type Command struct {
-	name string
 	run  func([]string) error
+	name string
 }
 
 var commands = []Command{
-	{"pwd", runPwd},
-	{"mkdir", runMkdir},
-	{"rm", runRm},
-	{"ls", runLs},
-	{"cat", runCat},
-	{"echo", runEcho},
-	{"dirname", runDirname},
-	{"basename", runBasename},
-	{"id", runId},
-	{"sleep", runSleep},
-	{"zip", runZip},
-	{"unzip", runUnzip},
-	{"false", func([]string) error { os.Exit(1); return nil }},
-	{"true", func([]string) error { os.Exit(0); return nil }},
+	{name: "pwd", run: runPwd},
+	{name: "mkdir", run: runMkdir},
+	{name: "rm", run: runRm},
+	{name: "ls", run: runLs},
+	{name: "cat", run: runCat},
+	{name: "echo", run: runEcho},
+	{name: "dirname", run: runDirname},
+	{name: "basename", run: runBasename},
+	{name: "id", run: runId},
+	{name: "sleep", run: runSleep},
+	{name: "zip", run: runZip},
+	{name: "unzip", run: runUnzip},
+	{name: "false", run: func([]string) error { os.Exit(1); return nil }},
+	{name: "true", run: func([]string) error { os.Exit(0); return nil }},
 }
 
 func printCommands() {

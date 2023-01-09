@@ -40,7 +40,7 @@ Options:
 	//lc := fset.Bool("lc", false, "list ctime")
 	//lu := fset.Bool("lu", false, "list atime")
 	//fullTime := fset.Bool("full-time", false, "list full date and time")
-	//human := fset.Bool("human", false, "human readable sizes (1K 243M 2G)") // TODO: should be -h
+	h := fset.Bool("h", false, "human readable sizes (1K 243M 2G)")
 	S := fset.Bool("S", false, "sort by size")
 	//X := fset.Bool("X", false, "sort by extension")
 	//v := fset.Bool("v", false, "sort by version")
@@ -130,7 +130,7 @@ Options:
 					continue
 				}
 			}
-			if err := lsLongList(w, fi); err != nil {
+			if err := lsLongList(w, fi, *h); err != nil {
 				return err
 			}
 		}
