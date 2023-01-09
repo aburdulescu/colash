@@ -1,0 +1,164 @@
+* todo [14/75]
+** TODO gunzip
+** TODO gzip
+** TODO tar
+** TODO mv
+** TODO cp
+** TODO touch
+** TODO cut
+** TODO printf
+** TODO sort
+** TODO wc
+** TODO diff
+** TODO grep
+** TODO find
+** TODO seq
+** TODO head
+** TODO tail
+** TODO sed
+** TODO awk
+** TODO jq
+** TODO hexdiff
+** TODO ssh
+** TODO sshd
+** TODO cmp
+** TODO crond
+** TODO crontab
+** TODO dd
+** TODO df
+** TODO du
+** TODO env
+** TODO nl
+** TODO hexdump
+** TODO kill
+** TODO killall
+** TODO ln
+** TODO lzcat
+** TODO lzma
+** TODO lzop
+** TODO md5sum
+** TODO mktemp
+** TODO nc
+** TODO nproc
+** TODO sh
+** TODO sha1sum
+** TODO sha256sum
+** TODO sha512sum
+** TODO shred
+** TODO stat
+** TODO strings
+** TODO tee
+** TODO time
+** TODO timeout
+** TODO tr
+** TODO uniq
+** TODO zstd
+** TODO xxhsum
+** TODO wget
+** TODO xargs
+** TODO xxd
+** TODO yes
+** TODO rsync
+** TODO rsyncd
+** DONE zip
+** DONE unzip
+** DONE cat, without any options
+** DONE ls => with main options
+** DONE sleep
+** DONE echo
+** DONE id
+** DONE rm
+** DONE true
+** DONE false
+** DONE pwd
+** DONE dirname
+** DONE basename
+** DONE mkdir
+
+* maybe
+** bunzip2
+** bzcat
+** bzip2
+** cal
+** chgrp
+** chmod
+** chown
+** chpasswd
+** chroot
+** clear
+** date
+** ash
+** ed
+** expand
+** expr
+** factor
+** fallocate
+** fdisk
+** fold
+** free
+** ftpget
+** ftpput
+** getopt
+** halt
+** hostid
+** ifconfig
+** ifdown
+** ifup
+** init
+** ip
+** ipcalc
+** less
+** link
+** mkfifo
+** mknod
+** mkpasswd
+** mkswap
+** more
+** mount
+** netstat
+** nslookup
+** nuke
+** od
+** passwd
+** paste
+** patch
+** pidof
+** ping
+** ping6
+** poweroff
+** ps
+** realpath
+** reboot
+** renice
+** reset
+** rev
+** shuf
+** su
+** swapoff
+** swapon
+** sync
+** sysctl
+** tac
+** taskset
+** telnet
+** telnetd
+** test
+** tftp
+** top
+** truncate
+** umount
+** uname
+** unexpand
+** unlink
+** unlzma
+** unxz
+** uptime
+** vi
+** w
+** watch
+** which
+** who
+** whoami
+** xz
+** xzcat
+** zcat
