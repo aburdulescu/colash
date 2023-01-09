@@ -9,6 +9,7 @@ import (
 
 func runCat(args []string) error {
 	fset := flag.NewFlagSet("cat", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: cat [FILE]...
 
@@ -18,7 +19,11 @@ With no FILE, or when FILE is -, read standard input.
 `)
 		os.Exit(1)
 	}
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	var r io.Reader
 	if fset.NArg() == 0 {
 		r = os.Stdin

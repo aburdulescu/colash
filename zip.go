@@ -28,7 +28,9 @@ Options:
 
 	fOutput := fset.String("o", "", "Output name")
 
-	fset.Parse(args)
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
 
 	args = fset.Args()
 	if len(args) == 0 {
@@ -54,7 +56,7 @@ Options:
 			return err
 		}
 		if fi.IsDir() {
-			filepath.WalkDir(arg, func(path string, d fs.DirEntry, err error) error {
+			err := filepath.WalkDir(arg, func(path string, d fs.DirEntry, err error) error {
 				if err != nil {
 					return err
 				}
@@ -64,6 +66,9 @@ Options:
 				files = append(files, path)
 				return nil
 			})
+			if err != nil {
+				return err
+			}
 		} else {
 			files = append(files, filepath.Clean(arg))
 		}

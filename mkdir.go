@@ -10,6 +10,7 @@ import (
 
 func runMkdir(args []string) error {
 	fset := flag.NewFlagSet("mkdir", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: mkdir [options] DIRECTORY...
 
@@ -20,9 +21,14 @@ Options:
 		fset.PrintDefaults()
 		os.Exit(1)
 	}
+
 	p := fset.Bool("p", false, "no error if exists; make parent directories as needed")
 	m := fset.String("m", "0755", "mode")
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	if fset.NArg() < 1 {
 		fset.Usage()
 		return nil

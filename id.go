@@ -11,6 +11,7 @@ import (
 
 func runId(args []string) error {
 	fset := flag.NewFlagSet("id", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: id [OPTION]... USER
 
@@ -21,11 +22,16 @@ Options:
 		fset.PrintDefaults()
 		os.Exit(1)
 	}
+
 	flagUser := fset.Bool("u", false, "print user ID")
 	flagGroup := fset.Bool("g", false, "print group ID")
 	flagSupGroups := fset.Bool("G", false, "print suplementary group IDs")
 	flagPrintNames := fset.Bool("n", false, "print names instead of numbers")
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	var u *user.User
 	if fset.NArg() < 1 {
 		v, err := user.Current()

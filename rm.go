@@ -10,6 +10,7 @@ import (
 
 func runRm(args []string) error {
 	fset := flag.NewFlagSet("rm", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: rm [OPTION] PATH...
 
@@ -20,9 +21,14 @@ Options:
 		fset.PrintDefaults()
 		os.Exit(1)
 	}
+
 	r := fset.Bool("r", false, "remove directories and their contents recursively")
 	f := fset.Bool("f", false, "ignore nonexistent files and arguments, never prompt")
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	for _, v := range fset.Args() {
 		if !*f {
 			answer := prompt("rm: remove '" + v + "'? [y/n]")
@@ -47,6 +53,7 @@ Options:
 			return err
 		}
 	}
+
 	return nil
 }
 

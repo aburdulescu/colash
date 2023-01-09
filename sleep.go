@@ -11,6 +11,7 @@ import (
 
 func runSleep(args []string) error {
 	fset := flag.NewFlagSet("sleep", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: sleep NUMBER[SUFFIX]
 
@@ -21,10 +22,15 @@ NUMBER need not be an integer.
 `)
 		os.Exit(1)
 	}
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	if fset.NArg() < 1 {
 		fset.Usage()
 	}
+
 	input := fset.Arg(0)
 	var conv func(n float64) time.Duration
 	switch {

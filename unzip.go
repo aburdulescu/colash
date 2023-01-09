@@ -27,7 +27,9 @@ Options:
 	fDir := fset.String("d", "", "Directory where to extract the files.")
 	fList := fset.Bool("l", false, "List archive files.")
 
-	fset.Parse(args)
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
 
 	args = fset.Args()
 	if len(args) == 0 {
@@ -41,7 +43,9 @@ Options:
 	defer r.Close()
 
 	if *fDir != "" {
-		os.MkdirAll(*fDir, 0755)
+		if err := os.MkdirAll(*fDir, 0755); err != nil {
+			return err
+		}
 	}
 
 	base := *fDir

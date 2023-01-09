@@ -12,6 +12,7 @@ import (
 
 func runLs(args []string) error {
 	fset := flag.NewFlagSet("ls", flag.ContinueOnError)
+
 	fset.Usage = func() {
 		fmt.Fprint(os.Stderr, `Usage: ls [OPTION] PATH...
 
@@ -22,6 +23,7 @@ Options:
 		fset.PrintDefaults()
 		os.Exit(1)
 	}
+
 	one := fset.Bool("1", false, "list one file per line")
 	a := fset.Bool("a", false, "include entries which start with .")
 	//A := fset.Bool("A", false, "like -a, but exclude . and ..")
@@ -48,7 +50,11 @@ Options:
 	r := fset.Bool("r", false, "reverse sort order")
 	//w := fset.Uint("w", 0, "format N columns wide")
 	//color := fset.String("color", "always", "control coloring, one of: always,never,auto")
-	fset.Parse(args)
+
+	if err := fset.Parse(args); err != nil {
+		return err
+	}
+
 	sep := "  "
 	if *one {
 		sep = "\n"
