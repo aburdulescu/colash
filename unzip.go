@@ -2,11 +2,13 @@ package main
 
 import (
 	"archive/zip"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/tabwriter"
 )
 
@@ -68,13 +70,21 @@ Options:
 				return err
 			}
 			defer src.Close()
-			dst, err := os.Create(filepath.Join(base, f.Name))
+			dst, err := os.Create(filepath.Join(base, strings.ReplaceAll(f.Name, "..", "")))
 			if err != nil {
 				return err
 			}
 			defer dst.Close()
-			if _, err := io.Copy(dst, src); err != nil {
-				return nil
+
+			// copy in chunks to avoid decompression bomb
+			for {
+				_, err := io.CopyN(dst, src, 8192)
+				if err != nil {
+					if errors.Is(err, io.EOF) {
+						break
+					}
+					return err
+				}
 			}
 		}
 	}
