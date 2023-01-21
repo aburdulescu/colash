@@ -9,7 +9,7 @@ import (
 func lsLongList(w io.Writer, fi fs.FileInfo, human bool) error {
 	fmt.Fprintf(w, "%s", fi.Mode())
 	if human {
-		fmt.Fprintf(w, "\t%s", PrettySize(fi.Size()))
+		fmt.Fprintf(w, "\t%s", HRSize(fi.Size()))
 	} else {
 		fmt.Fprintf(w, "\t%d", fi.Size())
 	}
