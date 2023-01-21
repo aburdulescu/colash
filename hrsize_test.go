@@ -4,9 +4,9 @@ import (
 	"testing"
 )
 
-func TestPrettySize(t *testing.T) {
+func TestHRSize(t *testing.T) {
 	tests := []struct {
-		input    PrettySize
+		input    HRSize
 		expected string
 	}{
 		{42, "42"},

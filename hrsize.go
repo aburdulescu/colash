@@ -4,7 +4,8 @@ import (
 	"fmt"
 )
 
-type PrettySize uint64
+// Human Readable Size
+type HRSize uint64
 
 const (
 	KB = 1 << 10
@@ -13,7 +14,7 @@ const (
 	TB = GB << 10
 )
 
-func (s PrettySize) String() string {
+func (s HRSize) String() string {
 	switch {
 	case s >= TB:
 		return fmt.Sprintf("%.1fT", float64(s)/float64(TB))
