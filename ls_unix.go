@@ -12,7 +12,10 @@ import (
 )
 
 func lsLongList(w io.Writer, fi fs.FileInfo, human bool) error {
-	st := fi.Sys().(*syscall.Stat_t)
+	st, ok := fi.Sys().(*syscall.Stat_t)
+	if !ok {
+		return fmt.Errorf("type assertion to syscall.Stat_t failed")
+	}
 	u, err := user.LookupId(strconv.FormatUint(uint64(st.Uid), 10))
 	if err != nil {
 		return err
