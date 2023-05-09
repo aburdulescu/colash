@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"bandr.me/p/colash/internal/find"
 )
 
 type Command struct {
@@ -25,6 +27,7 @@ var commands = []Command{
 	{name: "unzip", run: runUnzip},
 	{name: "false", run: func([]string) error { os.Exit(1); return nil }},
 	{name: "true", run: func([]string) error { os.Exit(0); return nil }},
+	{name: "find", run: find.Run},
 }
 
 func printCommands() {
