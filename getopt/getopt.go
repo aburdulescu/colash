@@ -14,24 +14,24 @@ type OptSet struct {
 }
 
 type opt struct {
+	usage string
 	name  byte
 	typ   optType
-	usage string
 }
 
 type intOpt struct {
-	opt
 	value *int64
+	opt
 }
 
 type boolOpt struct {
-	opt
 	value *bool
+	opt
 }
 
 type stringOpt struct {
-	opt
 	value *string
+	opt
 }
 
 type optType uint8
@@ -95,7 +95,7 @@ func (self *OptSet) String(ptr *string, name byte, value string, usage string) {
 }
 
 func (self *OptSet) Parse(args []string) error {
-	self.args = self.args[:]
+	self.args = self.args[:0]
 
 	for _, arg := range args {
 		if len(arg) == 0 {
@@ -130,6 +130,10 @@ func (self *OptSet) Parse(args []string) error {
 					return fmt.Errorf("string options must have a value")
 				}
 				*self.strings[i].value = arg[2:]
+			case optUndefined:
+				panic("unreachable")
+			default:
+				panic("unreachable")
 			}
 
 		} else {

@@ -39,6 +39,7 @@ NUMBER need not be an integer.
 		conv = func(n float64) time.Duration {
 			i := time.Duration(n)
 			r := n - float64(i)
+			// nolint:durationcheck
 			return i*time.Second + time.Duration(r*1000)*time.Millisecond
 		}
 	case strings.HasSuffix(input, "m"):
@@ -46,6 +47,7 @@ NUMBER need not be an integer.
 		conv = func(n float64) time.Duration {
 			i := time.Duration(n)
 			r := n - float64(i)
+			// nolint:durationcheck
 			return i*time.Minute + time.Duration(r*60)*time.Second
 		}
 	case strings.HasSuffix(input, "h"):
@@ -53,6 +55,7 @@ NUMBER need not be an integer.
 		conv = func(n float64) time.Duration {
 			i := time.Duration(n)
 			r := n - float64(i)
+			// nolint:durationcheck
 			return i*time.Hour + time.Duration(r*60)*time.Minute
 		}
 	case strings.HasSuffix(input, "d"):
@@ -60,12 +63,14 @@ NUMBER need not be an integer.
 		conv = func(n float64) time.Duration {
 			i := time.Duration(n)
 			r := n - float64(i)
+			// nolint:durationcheck
 			return i*time.Hour*24 + time.Duration(r*24)*time.Hour
 		}
 	default:
 		conv = func(n float64) time.Duration {
 			i := time.Duration(n)
 			r := n - float64(i)
+			// nolint:durationcheck
 			return i*time.Second + time.Duration(r*1000)*time.Millisecond
 		}
 	}

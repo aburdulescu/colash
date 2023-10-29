@@ -40,7 +40,7 @@ Options:
 	dstPath := *fOutput
 	if dstPath == "" {
 		if len(args) > 1 {
-			return errors.New("need output name(-o) when specifing multiple inputs")
+			return errors.New("need output name(-o) when specifying multiple inputs")
 		}
 		dstPath = args[0] + ".zip"
 	}
