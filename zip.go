@@ -105,9 +105,5 @@ Options:
 		}
 	}
 
-	if err := w.Close(); err != nil {
-		return err
-	}
-
-	return nil
+	return w.Close()
 }

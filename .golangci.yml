@@ -33,7 +33,8 @@ linters:
     - lll
     - errchkjson
     - prealloc
-    # - stylecheck
+    - stylecheck
+    - revive
 
 linters-settings:
   funlen:

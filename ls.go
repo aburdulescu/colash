@@ -92,18 +92,16 @@ Options:
 			sort.Slice(result, func(i, j int) bool {
 				if *r {
 					return result[i].Size() < result[j].Size()
-				} else {
-					return result[i].Size() > result[j].Size()
 				}
+				return result[i].Size() > result[j].Size()
 			})
 		}
 		if *t {
 			sort.Slice(result, func(i, j int) bool {
 				if *r {
 					return !result[i].ModTime().After(result[j].ModTime())
-				} else {
-					return !result[i].ModTime().Before(result[j].ModTime())
 				}
+				return !result[i].ModTime().Before(result[j].ModTime())
 			})
 		}
 	}

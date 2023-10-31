@@ -21,7 +21,7 @@ var commands = []Command{
 	{name: "echo", run: runEcho},
 	{name: "dirname", run: runDirname},
 	{name: "basename", run: runBasename},
-	{name: "id", run: runId},
+	{name: "id", run: runID},
 	{name: "sleep", run: runSleep},
 	{name: "zip", run: runZip},
 	{name: "unzip", run: runUnzip},

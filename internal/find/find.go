@@ -65,8 +65,5 @@ func Run(args []string) error {
 		fmt.Fprint(os.Stderr, usage)
 		os.Exit(1)
 	}
-	if err := fset.Parse(args); err != nil {
-		return err
-	}
-	return nil
+	return fset.Parse(args)
 }

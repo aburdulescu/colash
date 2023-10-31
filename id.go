@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func runId(args []string) error {
+func runID(args []string) error {
 	fset := flag.NewFlagSet("id", flag.ContinueOnError)
 
 	fset.Usage = func() {

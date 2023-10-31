@@ -43,14 +43,14 @@ const (
 	optString
 )
 
-func (self *OptSet) Int(ptr *int64, name byte, value int64, usage string) {
-	if i, _ := self.find(name); i != -1 {
+func (o *OptSet) Int(ptr *int64, name byte, value int64, usage string) {
+	if i, _ := o.find(name); i != -1 {
 		panic("option with the same name defined multiple times")
 	}
 
 	*ptr = value
 
-	self.ints = append(self.ints, intOpt{
+	o.ints = append(o.ints, intOpt{
 		opt: opt{
 			name:  name,
 			typ:   optInt,
@@ -60,14 +60,14 @@ func (self *OptSet) Int(ptr *int64, name byte, value int64, usage string) {
 	})
 }
 
-func (self *OptSet) Bool(ptr *bool, name byte, value bool, usage string) {
-	if i, _ := self.find(name); i != -1 {
+func (o *OptSet) Bool(ptr *bool, name byte, value bool, usage string) {
+	if i, _ := o.find(name); i != -1 {
 		panic("option with the same name defined multiple times")
 	}
 
 	*ptr = value
 
-	self.bools = append(self.bools, boolOpt{
+	o.bools = append(o.bools, boolOpt{
 		opt: opt{
 			name:  name,
 			typ:   optBool,
@@ -77,14 +77,14 @@ func (self *OptSet) Bool(ptr *bool, name byte, value bool, usage string) {
 	})
 }
 
-func (self *OptSet) String(ptr *string, name byte, value string, usage string) {
-	if i, _ := self.find(name); i != -1 {
+func (o *OptSet) String(ptr *string, name byte, value string, usage string) {
+	if i, _ := o.find(name); i != -1 {
 		panic("option with the same name defined multiple times")
 	}
 
 	*ptr = value
 
-	self.strings = append(self.strings, stringOpt{
+	o.strings = append(o.strings, stringOpt{
 		opt: opt{
 			name:  name,
 			typ:   optString,
@@ -94,8 +94,8 @@ func (self *OptSet) String(ptr *string, name byte, value string, usage string) {
 	})
 }
 
-func (self *OptSet) Parse(args []string) error {
-	self.args = self.args[:0]
+func (o *OptSet) Parse(args []string) error {
+	o.args = o.args[:0]
 
 	for _, arg := range args {
 		if len(arg) == 0 {
@@ -104,7 +104,7 @@ func (self *OptSet) Parse(args []string) error {
 		if arg[0] == '-' && len(arg) > 1 {
 			name := arg[1]
 
-			i, t := self.find(name)
+			i, t := o.find(name)
 			if i == -1 {
 				return fmt.Errorf("unknown option '%c'", name)
 			}
@@ -118,18 +118,18 @@ func (self *OptSet) Parse(args []string) error {
 				if err != nil {
 					return err
 				}
-				*self.ints[i].value = v
+				*o.ints[i].value = v
 			case optBool:
 				if len(arg[2:]) != 0 {
 					return fmt.Errorf("boolean options cannot have a value")
 				}
-				v := *self.bools[i].value
-				*self.bools[i].value = !v
+				v := *o.bools[i].value
+				*o.bools[i].value = !v
 			case optString:
 				if len(arg[2:]) == 0 {
 					return fmt.Errorf("string options must have a value")
 				}
-				*self.strings[i].value = arg[2:]
+				*o.strings[i].value = arg[2:]
 			case optUndefined:
 				panic("unreachable")
 			default:
@@ -137,29 +137,29 @@ func (self *OptSet) Parse(args []string) error {
 			}
 
 		} else {
-			self.args = append(self.args, arg)
+			o.args = append(o.args, arg)
 		}
 	}
 
 	return nil
 }
 
-func (self OptSet) Args() []string {
-	return self.args
+func (o OptSet) Args() []string {
+	return o.args
 }
 
-func (self OptSet) find(name byte) (int, optType) {
-	for i, v := range self.ints {
+func (o OptSet) find(name byte) (int, optType) {
+	for i, v := range o.ints {
 		if v.name == name {
 			return i, optInt
 		}
 	}
-	for i, v := range self.bools {
+	for i, v := range o.bools {
 		if v.name == name {
 			return i, optBool
 		}
 	}
-	for i, v := range self.strings {
+	for i, v := range o.strings {
 		if v.name == name {
 			return i, optString
 		}
